@@ -40,6 +40,12 @@ angular.module('cheaperApp')
 
       setItems: function (value) {
         chrome.extension.getBackgroundPage().cheapBackground.store = value;
+      },
+
+      openTab: function () {
+        chrome.tabs.create({
+          url: 'tab.html'
+        });
       }
     };
   });

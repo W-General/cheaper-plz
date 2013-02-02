@@ -18,6 +18,8 @@ angular.module('cheaperApp', []).
         });
       };
 
+      $scope.openTab = chromeApp.openTab;
+
       scrape.getItems();
 
     });

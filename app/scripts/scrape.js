@@ -10,7 +10,7 @@ angular.module('cheaperApp')
 
     var getItems = function () {
       urls.forEach(function (url) {
-        $http.post('http://localhost:3000/api/', {
+        $http.post('http://localhost:3000/api/scrape', {
           url: url
         }).success(function (item) {
           console.log(item);
