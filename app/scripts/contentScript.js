@@ -21,8 +21,9 @@ commands.scrape = function (pl, cb) {
   var item;
   try {
     item = {
-      price: document.getElementsByClassName('priceLarge')[0].innerText,
-      name: 'robot'
+      price: document.getElementsByClassName('priceLarge')[0].innerText.trim(),
+      name: document.getElementsByClassName('parseasinTitle')[0].innerText.trim(),
+      url: document.location.toString()
     };
   } catch (e) {}
   if (item) {

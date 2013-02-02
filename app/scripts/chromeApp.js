@@ -1,5 +1,5 @@
 angular.module('cheaperApp')
-  .factory('chromeApp', function ($rootScope) {
+  .factory('chromeApp', function ($rootScope, scrape) {
 
     var commands = {};
 
@@ -45,6 +45,24 @@ angular.module('cheaperApp')
       openTab: function () {
         chrome.tabs.create({
           url: 'tab.html'
+        });
+      },
+
+      refresh: function (cb) {
+        var items = chrome.extension.getBackgroundPage().cheapBackground.store;
+        var changed = false;
+        var toProc = items.length;
+        items.forEach(function (item, i) {
+          scrape.getItem(item.url, function (updatedItem) {
+            if (items[i].price !== updatedItem.price) {
+              changed = true;
+              items[i].price = updatedItem.price;
+            }
+            toProc -= 1;
+            if (toProc === 0) {
+              cb(changed);
+            }
+          });
         });
       }
     };

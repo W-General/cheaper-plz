@@ -3,7 +3,7 @@
 
 angular.module('cheaperApp', []).
   controller('MainCtrl',
-    function ($scope, chromeApp, scrape) {
+    function ($scope, chromeApp) {
       $scope.items = chromeApp.getItems();
 
       chromeApp.addUpdateListener(function () {
@@ -18,8 +18,7 @@ angular.module('cheaperApp', []).
         });
       };
 
+      $scope.refresh = chromeApp.refresh;
       $scope.openTab = chromeApp.openTab;
-
-      scrape.getItems();
 
     });

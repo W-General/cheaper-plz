@@ -6,12 +6,28 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/cheaperTabApp.js"></script>
+    <script src="scripts/chromeApp.js"></script>
+    <script src="scripts/scrape.js"></script>
   </head>
-  <body ng-csp ng-app="cheaperTabApp">
+  <body ng-csp ng-app="cheaperApp">
 
     <div ng-controller="MainCtrl">
+
+      <button ng-click="refresh()">Refresh</button>
+
+      {{changed}}
+
       <h1>Cheaper Plz!</h1>
-      <p>{{greeting}}</p>
+
+      <ul>
+        <li ng-repeat="item in items">
+          <a href="{{item.url}}" target="_blank">
+            {{item.price}} {{item.name}}
+          </a>
+        </li>
+      </ul>
+
+
     </div>
 
   </body>

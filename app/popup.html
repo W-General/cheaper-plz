@@ -14,7 +14,9 @@
     <div ng-controller="MainCtrl">
       <ul>
         <li ng-repeat="item in items">
-          {{item.price}} {{item.name}}
+          <a href="{{item.url}}" target="_blank">
+            {{item.price}} {{item.name}}
+          </a>
         </li>
       </ul>
 
