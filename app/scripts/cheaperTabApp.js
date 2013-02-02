@@ -16,6 +16,7 @@ angular.module('cheaperApp', []).
       $scope.refreshButton = true;
 
       $scope.refresh = function () {
+        $scope.changed = '';
         $scope.refreshButton = false;
         chromeApp.refresh(function (changed) {
           $scope.changed = changed ?
@@ -23,6 +24,12 @@ angular.module('cheaperApp', []).
 
           $scope.refreshButton = true;
         });
+      };
+
+      $scope.data = [3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1];
+
+      $scope.addData = function () {
+        $scope.data.push(4);
       };
 
     });

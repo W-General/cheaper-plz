@@ -33,9 +33,11 @@ commands.getItems = function (pl, cb) {
 };
 
 // API available to extension contexts
-window.cheapBackground = {
-  store: store
-};
+window.store = store;
+
+// hash of URLs
+window.history = {};
+
 
 var remoteScrape = function (url, cb) {
   jQuery.post('http://localhost:3000/api/scrape', {
@@ -44,21 +46,48 @@ var remoteScrape = function (url, cb) {
 };
 
 window.refresh = function (cb) {
-  var items = window.cheapBackground.store;
+  var items = window.store;
   var changed = false;
   var toProc = items.length;
+
+  // if there are no items, immediately return that there was no change
+  if (items.length === 0) {
+
+    // needs to be called async because Angular
+    setTimeout(function () {
+      cb(false);
+    }, 0);
+  }
   items.forEach(function (item, i) {
     remoteScrape(item.url, function (updatedItem) {
-      if (updatedItem &&
-          items[i].price !== updatedItem.price) {
+      if (updatedItem) {
+        if (items[i].price !== updatedItem.price) {
 
-        changed = true;
-        items[i].price = updatedItem.price;
+          changed = true;
+          items[i].price = updatedItem.price;
+        }
+        history[item.url] =  history[item.url] || [];
+        history[item.url].push({
+          price: item.price,
+          time: Date.now()
+        });
       }
       toProc -= 1;
       if (toProc === 0) {
-        cb(changed);
+        if (cb) {
+          cb(changed);
+        }
+        if (changed) {
+          chrome.browserAction.setBadgeBackgroundColor([100, 255, 100, 100]);
+        }
       }
     });
   });
 };
+
+// one hour
+var interval = 1000 * 60 * 60;
+
+setInterval(function () {
+  window.refresh();
+}, interval);

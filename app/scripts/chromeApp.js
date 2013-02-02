@@ -35,11 +35,11 @@ angular.module('cheaperApp')
       },
 
       getItems: function () {
-        return chrome.extension.getBackgroundPage().cheapBackground.store || [];
+        return chrome.extension.getBackgroundPage().store || [];
       },
 
       setItems: function (value) {
-        chrome.extension.getBackgroundPage().cheapBackground.store = value;
+        chrome.extension.getBackgroundPage().store = value;
       },
 
       openTab: function () {

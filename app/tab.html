@@ -3,31 +3,57 @@
   <head>
     <meta charset="utf-8">
     <title>Cheaper Plz!</title>
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/themed-bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
+
     <script src="scripts/angular.min.js"></script>
+    <script src="scripts/d3.v3.js"></script>
+
     <script src="scripts/cheaperTabApp.js"></script>
     <script src="scripts/chromeApp.js"></script>
+    <script src="scripts/sparklineDirective.js"></script>
   </head>
   <body ng-csp ng-app="cheaperApp">
 
-    <div ng-controller="MainCtrl">
+    <div ng-controller="MainCtrl" class="container">
 
-      <button ng-click="refresh()"
-        ng-disabled="!refreshButton">Refresh</button>
+      <div class="row">
+        <h1>Cheaper Plz!</h1>
+      </div>
 
-      {{changed}}
+      <hr class="row">
 
-      <h1>Cheaper Plz!</h1>
+      <div class="row" ng-show="items.length > 0">
+        <div class="span4">
+          <button class="btn" ng-click="refresh()"
+            ng-disabled="!refreshButton">Refresh</button>
+        </div>
+        <div class="span8">
+          <div class="alert alert-info" ng-show="changed">{{changed}}</div>
+        </div>
+      </div>
 
-      <ul>
-        <li ng-repeat="item in items">
+      <hr class="row">
+
+      <div class="row" ng-repeat="item in items">
+        <div class="span3">
+          <h2>{{item.price}}</h2>
+        </div>
+        <div class="span9">
           <a href="{{item.url}}" target="_blank">
-            {{item.price}} {{item.name}}
+             <h1>{{item.name}}</h1>
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
 
+      <div class="row" ng-show="items.length == 0">
+        <p>You have no watched items! Go browse <a href="http://www.amazon.com/">Amazon</a> or <a href="http://www.ebay.com">eBay</a> or something.</p>
+      </div>
+      <div class="row">
+        <sparkline data="data"></sparkline>
+      </div>
+
+      <button ng-click="addData()">More Data</button>
 
     </div>
 

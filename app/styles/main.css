@@ -1,1 +1,8 @@
 /* Will be compiled down to a single stylesheet with your sass files */
+
+/* tell the SVG path to be a thin blue line without any area fill */
+path {
+  stroke: steelblue;
+  stroke-width: 1;
+  fill: none;
+}
