@@ -1,4 +1,4 @@
-/*global chrome:false*/
+/*global chrome:false, getDefinition:false*/
 'use strict';
 
 var commands = {};
@@ -20,13 +20,11 @@ chrome.extension.onMessage.addListener(function(
 commands.scrape = function (pl, cb) {
   var item;
   try {
-    item = {
-      price: document.getElementsByClassName('priceLarge')[0].innerText.trim(),
-      name: document.getElementsByClassName('parseasinTitle')[0].innerText.trim(),
-      url: document.location.toString()
-    };
+    // determine site; currently ebay||amazon
+    item = getDefinition(document);
   } catch (e) {}
   if (item) {
+    item.url = document.location.toString();
     chrome.extension.sendMessage({
       command: 'addItem',
       payload: item

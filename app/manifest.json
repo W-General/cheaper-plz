@@ -19,7 +19,7 @@
   
   "content_scripts": [
     {
-      "js": ["scripts/contentScript.js"],
+      "js": ["scripts/scrapeDefinitions.js", "scripts/contentScript.js"],
       "matches": ["<all_urls>"]
     }
   ],
