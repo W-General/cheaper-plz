@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>cheaperPlz</title>
+    <!-- build:css styles/app.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-csp ng-app="cheaperApp">
+    <h1>cheaperPlz</h1>
+    <div ng-controller="MainCtrl">
+      <ul>
+        <li ng-repeat="item in items">
+          {{item}}
+        </li>
+      </ul>
+    </div>
+
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/cheaperApp.js"></script>
+  </body>
+</html>

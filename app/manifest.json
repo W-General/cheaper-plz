@@ -1,0 +1,19 @@
+{
+  "name": "Cheaper Please",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "Price search, price alerts. Save $$$",
+  "icons": {
+    "16": "icon-16.png",
+    "128": "icon-128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "icon-16.png"
+    },
+    "default_title": "Cheaper Plz",
+    "default_popup": "index.html"
+  },
+  "permissions": []
+}
