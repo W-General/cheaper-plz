@@ -1,4 +1,5 @@
 /*global chrome:false*/
+'use strict';
 
 var commands = {};
 

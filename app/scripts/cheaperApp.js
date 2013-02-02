@@ -1,9 +1,12 @@
+/*global angular:false, chrome:false*/
+'use strict';
+
 angular.module('cheaperApp', []).
   controller('MainCtrl',
-    function ($scope, chromeApp) {
+    function ($scope, chromeApp, scrape) {
       $scope.items = chromeApp.getItems();
 
-      chromeApp.addUpdateListener(function (item) {
+      chromeApp.addUpdateListener(function () {
         $scope.items = chromeApp.getItems();
       });
 
@@ -14,5 +17,7 @@ angular.module('cheaperApp', []).
           });
         });
       };
+
+      scrape.getItems();
 
     });
