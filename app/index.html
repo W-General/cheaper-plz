@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>cheaperPlz</title>
-    <!-- build:css styles/app.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/cheaperApp.js"></script>
   </head>
   <body ng-csp ng-app="cheaperApp">
-    <h1>cheaperPlz</h1>
+
     <div ng-controller="MainCtrl">
       <ul>
         <li ng-repeat="item in items">
-          {{item}}
+          {{item.price}} {{item.name}}
         </li>
       </ul>
+
+      <a href ng-click="scrape()">Add Item</a>
     </div>
 
-    <script src="scripts/angular.min.js"></script>
-    <script src="scripts/cheaperApp.js"></script>
   </body>
 </html>

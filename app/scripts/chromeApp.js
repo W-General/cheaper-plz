@@ -1,6 +1,5 @@
 angular.module('cheaperApp')
-  .factory('findItem', function () {
-
+  .factory('chromeApp', function () {
 
 
     return {
