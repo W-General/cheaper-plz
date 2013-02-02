@@ -1,10 +1,10 @@
 angular.module('cheaperApp', []).
   controller('MainCtrl',
     function ($scope, chromeApp) {
-      $scope.items = chrome.extension.getBackgroundPage().cheapBackground.store || [];
+      $scope.items = chromeApp.getItems();
 
       chromeApp.addUpdateListener(function (item) {
-        $scope.items = chrome.extension.getBackgroundPage().cheapBackground.store || [];
+        $scope.items = chromeApp.getItems();
       });
 
       $scope.scrape = function () {

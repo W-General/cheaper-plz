@@ -32,6 +32,14 @@ angular.module('cheaperApp')
     return {
       addUpdateListener: function (fn) {
         onUpdateItems.push(fn);
+      },
+
+      getItems: function () {
+        return chrome.extension.getBackgroundPage().cheapBackground.store || [];
+      },
+
+      setItems: function (value) {
+        chrome.extension.getBackgroundPage().cheapBackground.store = value;
       }
     };
   });
