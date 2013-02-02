@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>Cheaper Plz!</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/cheaperTabApp.js"></script>
     <script src="scripts/chromeApp.js"></script>
-    <script src="scripts/scrape.js"></script>
   </head>
   <body ng-csp ng-app="cheaperApp">
 
     <div ng-controller="MainCtrl">
 
-      <button ng-click="refresh()">Refresh</button>
+      <button ng-click="refresh()"
+        ng-disabled="!refreshButton">Refresh</button>
 
       {{changed}}
 

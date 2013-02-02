@@ -13,11 +13,15 @@ angular.module('cheaperApp', []).
       });
 
       $scope.changed = '';
+      $scope.refreshButton = true;
 
       $scope.refresh = function () {
+        $scope.refreshButton = false;
         chromeApp.refresh(function (changed) {
           $scope.changed = changed ?
             'Items were updated!' : 'Nothing new!';
+
+          $scope.refreshButton = true;
         });
       };
 

@@ -1,6 +1,6 @@
 var commands = {};
 
-// route 
+// route
 chrome.extension.onMessage.addListener(function(
   request,
   sender,
@@ -35,4 +35,30 @@ commands.getItems = function (pl, cb) {
 // API available to extension contexts
 window.cheapBackground = {
   store: store
+};
+
+var remoteScrape = function (url, cb) {
+  jQuery.post('http://localhost:3000/api/scrape', {
+    url: url
+  }, cb);
+};
+
+window.refresh = function (cb) {
+  var items = window.cheapBackground.store;
+  var changed = false;
+  var toProc = items.length;
+  items.forEach(function (item, i) {
+    remoteScrape(item.url, function (updatedItem) {
+      if (updatedItem &&
+          items[i].price !== updatedItem.price) {
+
+        changed = true;
+        items[i].price = updatedItem.price;
+      }
+      toProc -= 1;
+      if (toProc === 0) {
+        cb(changed);
+      }
+    });
+  });
 };

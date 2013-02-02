@@ -1,5 +1,5 @@
 angular.module('cheaperApp')
-  .factory('chromeApp', function ($rootScope, scrape) {
+  .factory('chromeApp', function ($rootScope) {
 
     var commands = {};
 
@@ -49,19 +49,9 @@ angular.module('cheaperApp')
       },
 
       refresh: function (cb) {
-        var items = chrome.extension.getBackgroundPage().cheapBackground.store;
-        var changed = false;
-        var toProc = items.length;
-        items.forEach(function (item, i) {
-          scrape.getItem(item.url, function (updatedItem) {
-            if (items[i].price !== updatedItem.price) {
-              changed = true;
-              items[i].price = updatedItem.price;
-            }
-            toProc -= 1;
-            if (toProc === 0) {
-              cb(changed);
-            }
+        chrome.extension.getBackgroundPage().refresh(function (diff) {
+          $rootScope.$apply(function () {
+            cb(diff);
           });
         });
       }

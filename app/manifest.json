@@ -19,13 +19,19 @@
   
   "content_scripts": [
     {
-      "js": ["scripts/scrapeDefinitions.js", "scripts/contentScript.js"],
+      "js": [
+        "scripts/scrapeDefinitions.js",
+        "scripts/contentScript.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ],
 
   "background": {
-    "scripts": ["scripts/backgroundScript.js"]
+    "scripts": [
+      "scripts/backgroundScript.js",
+      "scripts/jquery-1.9.0.min.js"
+    ]
   },
 
   "permissions": [
