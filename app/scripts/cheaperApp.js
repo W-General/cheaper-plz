@@ -1,19 +1,16 @@
 angular.module('cheaperApp', []).
   controller('MainCtrl',
-    function ($scope) {
-      $scope.items = [
-        { name: 'robot', price: "123"}
-      ];
+    function ($scope, chromeApp) {
+      $scope.items = chrome.extension.getBackgroundPage().cheapBackground.store || [];
+
+      chromeApp.addUpdateListener(function (item) {
+        $scope.items = chrome.extension.getBackgroundPage().cheapBackground.store || [];
+      });
 
       $scope.scrape = function () {
         chrome.tabs.getSelected(null, function (tab) {
           chrome.tabs.sendMessage(tab.id, {
             command: 'scrape'
-          }, function (item) {
-            if (item) {
-              $scope.$apply(function () {
-              });
-            }
           });
         });
       };

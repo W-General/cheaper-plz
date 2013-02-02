@@ -1,3 +1,4 @@
+/*global chrome:false*/
 
 var commands = {};
 
@@ -16,12 +17,17 @@ chrome.extension.onMessage.addListener(function(
 });
 
 commands.scrape = function (pl, cb) {
+  var item;
   try {
-    cb({
+    item = {
       price: document.getElementsByClassName('priceLarge')[0].innerText,
       name: 'robot'
+    };
+  } catch (e) {}
+  if (item) {
+    chrome.extension.sendMessage({
+      command: 'addItem',
+      payload: item
     });
-  } catch (e) {
-    cb(null);
   }
 };
