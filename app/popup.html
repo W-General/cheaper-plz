@@ -21,7 +21,7 @@
       </ul>
       <ul>
         <div class="row" ng-repeat="item in items">
-          <div class="span1">{{item.price}}</div>
+          <div class="span1">${{item.price}}</div>
           <div class="span3">
           <a href="{{item.url}}" target="_blank">
             {{item.name}}
