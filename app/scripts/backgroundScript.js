@@ -5,13 +5,16 @@ chrome.extension.onMessage.addListener(function(
   request,
   sender,
   sendResponse) {
-
   var command = request.command;
   var payload = request.payload;
+  var senderId = sender.tab.id;
+
 
   if (commands[command]) {
-    commands[command](payload, sendResponse);
+      commands[command](payload, sendResponse, senderId);
   }
+
+  
 });
 
 //In background.js:
@@ -36,3 +39,8 @@ commands.getItems = function (pl, cb) {
 window.cheapBackground = {
   store: store
 };
+
+
+commands.refreshIcon = function (pl, cb, senderId){
+  chrome.browserAction.setIcon({path: "icon-16-alt.png", tabId: senderId});
+}

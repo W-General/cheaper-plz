@@ -17,6 +17,7 @@ chrome.extension.onMessage.addListener(function(
 
 });
 
+
 commands.scrape = function (pl, cb) {
   var item;
   try {
@@ -31,3 +32,18 @@ commands.scrape = function (pl, cb) {
     });
   }
 };
+
+
+{
+  var check;
+  try {
+    check = getDefinition(document);
+  } catch (e) {}
+  if (check) {
+    chrome.extension.sendMessage({
+      command:'refreshIcon',
+      payload: null
+    });
+  }
+}
+
