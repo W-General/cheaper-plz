@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Cheaper Plz!</title>
+    <link rel="stylesheet" href="styles/themed-bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
 
     <script src="scripts/angular.min.js"></script>
@@ -10,19 +11,24 @@
     <script src="scripts/chromeApp.js"></script>
   </head>
   <body ng-csp ng-app="cheaperApp">
-
-    <div ng-controller="MainCtrl">
+    <div class="span5" ng-controller="MainCtrl">
+      <ul></ul>
       <ul>
-        <li ng-repeat="item in items">
-          <a href="{{item.url}}" target="_blank">
-            {{item.price}} {{item.name}}
-          </a>
-        </li>
+      <div class="row">
+        <div class="span1"><a href ng-click="scrape()">Add Item</a></div>
+        <div class="span3"><a href ng-click="openTab()">Open Tab</a></div>
+      </div>
       </ul>
-
-      <a href ng-click="scrape()">Add Item</a>
-      | <a href ng-click="openTab()">Open Tab</a>
+      <ul>
+        <div class="row" ng-repeat="item in items">
+          <div class="span1">{{item.price}}</div>
+          <div class="span3">
+          <a href="{{item.url}}" target="_blank">
+            {{item.name}}
+          </a>
+          </div>
+        </div>
+      </ul>
     </div>
-
   </body>
 </html>
